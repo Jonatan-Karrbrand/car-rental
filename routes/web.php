@@ -12,7 +12,7 @@
 */
 //Cars
 Route::get('/cars', 'CarController@index');
-Route::get('/cars/{id})', 'CarController@show');
+Route::get('/cars/{id}', 'CarController@show');
 
 Route::get('/movies', 'MovieController@index');
 

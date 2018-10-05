@@ -55,7 +55,13 @@ class CarController extends Controller
      */
     public function show($id)
     {
+<<<<<<< HEAD
 
+=======
+        $oneCar = Car::getOneCar($id);
+        //return $oneCar;  
+        return view('car', ['cars' => $oneCar]);
+>>>>>>> f065a487878d13b5b490f0008c99fab78543540e
     }
 
     /**
