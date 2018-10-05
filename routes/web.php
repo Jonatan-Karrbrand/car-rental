@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Cars
+Route::get('/cars', 'CarController@index');
+Route::get('/cars/{id})', 'CarController@show');
+
+Route::get('/movies', 'MovieController@index');
 
 Route::get('/', function () {
     return view('welcome');
