@@ -12,14 +12,25 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $var = $_POST['seats'];
-      var_dump($var);
-      exit();
-      $seats = $_GET['seats'];
 
-      $cars = Car::getAllCars($var);
+      // Finns det något finare sätt?
+      $seats = $this->validate($request, [
+        'seats' => 'required'
+      ]);
+      $bhp = $this->validate($request, [
+        'bhp' => 'required'
+      ]);
+
+      $from = $this->validate($request, [
+        'from' => 'required'
+      ]);
+      $to = $this->validate($request, [
+        'to' => 'required'
+      ]);
+
+      $cars = Car::getAllCars($seats, $bhp, $from, $to);
 
       return view('cars', [
         'cars' => $cars
@@ -55,13 +66,9 @@ class CarController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
-
-=======
         $oneCar = Car::getOneCar($id);
-        //return $oneCar;  
+        //return $oneCar;
         return view('car', ['cars' => $oneCar]);
->>>>>>> f065a487878d13b5b490f0008c99fab78543540e
     }
 
     /**
