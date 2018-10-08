@@ -14,8 +14,9 @@
 
 Route::get('/cars', 'CarController@index');
 Route::get('/cars/{id}', 'CarController@show');
+//Route::get('/cars/{id}', 'BookingController@store');
 
-Route::get('/movies', 'MovieController@index');
+Route::resource('booking', 'BookingController');
 
 Route::get('/', function () {
     return view('welcome');

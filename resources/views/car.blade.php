@@ -16,13 +16,7 @@
                     <p>Avgift: {{ $car->price_per_day }}kr/dag</p>
                 </div>
             @endforeach
-                {!! Form::open(['action' => 'CarController@store', 'method' => 'POST']) !!}
-                    {{Form::label('Från: ')}}
-                    {{Form::date('from', \Carbon\Carbon::now())}}
-                    {{Form::label('Till: ')}}
-                    {{Form::date('to', \Carbon\Carbon::now())}}
-                    {{Form::submit('Boka bil')}}
-                {!! Form::close() !!}
+            @include('bookings.create')
             </div>
         </div>
     </div>

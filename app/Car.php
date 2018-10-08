@@ -7,24 +7,30 @@ use DB;
 
 class Car extends Model
 {
-    public static function getOneCar($id) {
-        $result = DB::table('cars')
-        ->where('cars.car_id', $id)
-        ->get();
-        return $result;
-    }
-/*
-    public static function getAllBookings() {
-        $result = DB::table('booking')
-        ->join('cars', 'booking.car_id', '=', 'cars.car_id')
-        ->join('users', 'booking.user_id', '=', 'users.user_id')
-        ->select('cars.model', 'users.username', 'booking.total_price', 'booking.booked_from', 'booking.booked_to')
-        ->get();
-        return $result;
-    }*/
-/*
-    public static function storeBooking() {
-        $result = DB::table('booking')
-        ->insert();
-    }*/
+  protected $primaryKey = "car_id";
+
+  public static function getAllCars($seats, $bhp, $from, $to) {
+
+    $cars = DB::table('cars')
+      ->where('seats', '>=', $seats)
+      ->where('bhp', '>=', $bhp)
+      ->join('booking', 'cars.car_id', 'booking.booking_id')
+      // ->whereNotBetween('booking.booked_from', ['2018-10-15','2018-10-20'])
+      // ->whereNotBetween('booking.booked_to', ['2018-10-15','2018-10-20'])
+      ->whereNotBetween('booking.booked_from', [$from, $to])
+      ->whereNotBetween('booking.booked_to', [$from, $to])
+      ->paginate(5);
+
+    return $cars;
+  }
+
+
+  // get one car 
+  public static function getOneCar($id) {
+    $result = DB::table('cars')
+      ->where('cars.car_id', $id)
+      ->get();
+
+    return $result;
+   }
 }
