@@ -24,7 +24,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return view('car');
     }
 
     /**
@@ -35,7 +35,11 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$this->validate($request, [
+            'from' => 'required',
+            'to' => 'required'
+        ]);*/
+        return 123;
     }
 
     /**
@@ -47,7 +51,6 @@ class CarController extends Controller
     public function show($id)
     {
         $oneCar = Car::getOneCar($id);
-        //return $oneCar;  
         return view('car', ['cars' => $oneCar]);
     }
 
