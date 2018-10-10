@@ -14,23 +14,16 @@ class CarController extends Controller
      */
     public function index(Request $request)
     {
-
-      // Finns det något finare sätt?
-      $seats = $this->validate($request, [
-        'seats' => 'required'
-      ]);
-      $bhp = $this->validate($request, [
-        'bhp' => 'required'
-      ]);
-
-      $from = $this->validate($request, [
-        'from' => 'required'
-      ]);
-      $to = $this->validate($request, [
-        'to' => 'required'
+      $result = $this->validate($request, [
+        'seats' => '',
+        'bhp' => '',
+        'from' => '',
+        'to' => '',
+        'type' => '',
+        'gearbox' => ''
       ]);
 
-      $cars = Car::getAllCars($seats, $bhp, $from, $to);
+      $cars = Car::getAllCars($result);
 
       return view('cars', [
         'cars' => $cars
