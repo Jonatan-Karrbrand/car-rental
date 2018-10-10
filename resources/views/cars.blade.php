@@ -28,8 +28,32 @@
               {{Form::date('from', \Carbon\Carbon::now())}}
               {{Form::date('to', \Carbon\Carbon::now())}}
             </div>
+            <div class="form-group">
+              {{Form::label('type', 'Bil typ')}}
 
-          {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+              {{Form::select('type',
+                ['alla' => 'Alla typer',
+                'sedan' => 'Sedan',
+                'coupé' => 'Coupé',
+                'suv' => 'Suv',
+                'cab' => 'Cab',
+                'halvkombi' => 'Halvkombi',
+                'kombi' => 'Kombi',
+                'minibuss' => 'Minibuss',]
+              )}}
+            </div>
+            <div class="form-group">
+              {{Form::label('gearbox', 'Växellåda')}}
+
+              {{Form::select('gearbox',
+                ['alla' => 'Alla växellådor',
+                'Automat' => 'Automat',
+                'Manuell' => 'Manuell']
+              )}}
+            
+            </div>
+            {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+
           {!! Form::close() !!}
 
           @foreach ($cars as $car)
@@ -42,7 +66,6 @@
                   </div>
 
                   <div class="col-md-6">
-
                     <h2>{{ $car->model}}</h2>
                     Dygns kostnad: {{$car->price_per_day}}
                     <a href="/cars/{{$car->car_id}}">Mer info</a>
@@ -56,5 +79,7 @@
     <div>
       {{$cars->links()}}
     </div>
+
+  </div>
 </div>
 @endsection

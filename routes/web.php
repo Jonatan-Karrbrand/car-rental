@@ -11,14 +11,13 @@
 |
 */
 //Cars
+
 Route::get('/cars', 'CarController@index');
 Route::get('/cars/{id}', 'CarController@show');
 Route::resource('/admin', 'AdminController');
-
-
-
 Route::post('', 'AdminController@store')->name('Admin.store');
-
+//Route::get('/cars/{id}', 'BookingController@store');
+Route::resource('booking', 'BookingController');
 Route::get('/', function () {
     return view('welcome');
 });
