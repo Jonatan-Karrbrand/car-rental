@@ -44,16 +44,16 @@ class Car extends Model
       ->where('bhp', '>=', $result['bhp'])
       ->where($where[0], $where[1], $where[2])
       ->where($box[0], $box[1], $box[2])
-      ->join('booking', 'cars.car_id', 'booking.booking_id')
-      ->whereNotBetween('booking.booked_from', [$result['from'], $result['to']])
-      ->whereNotBetween('booking.booked_to', [$result['from'], $result['to']])
+      ->join('bookings', 'cars.car_id', 'bookings.booking_id')
+      ->whereNotBetween('bookings.booked_from', [$result['from'], $result['to']])
+      ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
       ->paginate(5);
 
     return $cars;
   }
 
 
-  // get one car 
+  // get one car
   public static function getOneCar($id) {
     $result = DB::table('cars')
       ->where('cars.car_id', $id)
