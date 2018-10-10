@@ -13,8 +13,11 @@
 //Cars
 Route::get('/cars', 'CarController@index');
 Route::get('/cars/{id}', 'CarController@show');
+Route::resource('/admin', 'AdminController');
 
-Route::get('/movies', 'MovieController@index');
+
+
+Route::post('', 'AdminController@store')->name('Admin.store');
 
 Route::get('/', function () {
     return view('welcome');
