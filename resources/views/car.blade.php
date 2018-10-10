@@ -15,17 +15,8 @@
                     <p>Antal hästkrafter: {{ $car->bhp }}</p>
                     <p>Avgift: {{ $car->price_per_day }}kr/dag</p>
                 </div>
-                <form action="car.blade.php" method="POST">
-                    <label>Från:</label>
-                    <input type="date" name="from" min="<?php echo date("Y-m-d"); ?>"><br>
-                    <label>Till:</label>
-                    <input type="date" name="to" min="<?php echo date("Y-m-d", strtotime("+1 day")); ?>"><br>
-                    <input class="btn btn-primary" type="submit" value="Boka">
-                <form>
-                {!! Form::open(['action' => 'controller']) !!}
-
-                {!! Form::close() !!}
             @endforeach
+            @include('bookings.create')
             </div>
         </div>
     </div>

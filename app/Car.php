@@ -7,7 +7,6 @@ use DB;
 
 class Car extends Model
 {
-
   protected $primaryKey = "car_id";
 
   public static function getAllCars($result) {
@@ -53,6 +52,8 @@ class Car extends Model
     return $cars;
   }
 
+
+  // get one car 
   public static function getOneCar($id) {
     $result = DB::table('cars')
       ->where('cars.car_id', $id)
