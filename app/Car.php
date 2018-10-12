@@ -43,7 +43,7 @@ class Car extends Model
     // }
     //
     // $result['from'] = $result['from']
-
+    /*
     $cars = DB::table('cars')
       ->where('seats', '>=', $result['seats'])
       ->where('bhp', '>=', $result['bhp'])
@@ -52,7 +52,19 @@ class Car extends Model
       ->join('bookings', 'cars.car_id', 'bookings.booking_id')
       ->whereNotBetween('bookings.booked_from', [$result['from'], $result['to']])
       ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
-      ->paginate(5);
+      ->paginate(5);*/
+
+      $cars = DB::select( DB::raw(
+        "SELECT *
+        FROM cars
+       WHERE cars.car_id NOT IN(
+          SELECT car_id
+          FROM bookings
+           WHERE bookings.booked_from <= '2018-10-18 00:00:00'
+             AND bookings.booked_to >= '2018-10-19 23:59:59'
+             OR bookings.booked_from >= '2018-10-18 00:00:00'
+             AND bookings.booked_to <= '2018-10-19 23:59:59')"
+    ));
 
     return $cars;
 
