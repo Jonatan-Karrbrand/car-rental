@@ -61,24 +61,16 @@ class CarController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
-      $comments = Comments::getComments($id);
 
+      $comments = Comments::getComments($id);
       $oneCar = Car::getOneCar($id);
-      
+      $bookings = Booking::getAllBookings();
+
       return view('car', [
         'cars' => $oneCar,
-        'comments' => $comments
+        'comments' => $comments,
+        'bookings' => $bookings
       ]);
-=======
-        $bookings = Booking::getAllBookings();
-        $oneCar = Car::getOneCar($id);
-        return view('car', 
-        [
-            'cars' => $oneCar,
-            'bookings' => $bookings
-        ]);
->>>>>>> 5bfb9d06cfc1894334d7f1c90492295cd9346f81
     }
 
     /**
