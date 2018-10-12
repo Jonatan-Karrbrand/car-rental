@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use App\AdminOnly;
+use App\AdminCar;
+use DB;
 
 
-class AdminController extends Controller
+class AdminCarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $cars = AdminOnly::getCars();
+        $cars = AdminCar::getCars();
 
         return view('adminCars', [
             'cars' => $cars
@@ -30,7 +31,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('createCar');
     }
 
     /**
@@ -59,7 +60,7 @@ class AdminController extends Controller
         $request->image->move(public_path('images'), $carImage);
 
         //sparar datan i tabellen cars i databasen
-        $newCar = new AdminOnly;
+        $newCar = new AdminCar;
 
         $newCar->model = $request['model'];
         $newCar->price_per_day = $request['price_per_day'];
@@ -93,9 +94,12 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        return view('update');
+        //returnar viewn update och skickar med ett id som används i update funktionen
+        return view('updateCar', [
+            'id' => $id
+        ]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -103,9 +107,40 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //hämtar den idt på bilen
+        $uppdateCar = AdminCar::find($request['car_id']);
+
+        //sql querryn för uppdate
+        //kollar om alla värdena är satta och om dem inte är det så används dem inte i uppdate querryn
+        if($request['model'] !== null){
+            $uppdateCar->model = $request['model'];
+        }
+        if($request['price_per_day'] !== null){
+            $uppdateCar->price_per_day = $request['price_per_day'];
+        }
+        if($request['seats'] !== null){
+            $uppdateCar->seats = $request['seats'];
+        }
+        if($request['bhp'] !== null){
+            $uppdateCar->bhp = $request['bhp'];
+        }
+        if($request['car_type'] !== null){
+            $uppdateCar->car_type = $request['car_type'];
+        }
+        if($request['geatbox'] !== null){
+            $uppdateCar->gearbox = $request['gearbox'];
+        }
+        if($carImage !== null){
+        $uppdateCar->image = 'images/' . $carImage;
+        }
+        //kör uppdate querryn
+        $uppdateCar->save();
+
+
+        //skickar tillbaks dig till /admin och medelar att det gick bra
+        return redirect()->action('AdminController@index')->with('message', 'Bilen uppdaterades utan problem');
     }
 
     /**
@@ -116,12 +151,15 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $car = Car::find($id);
+      $car->delete();
+      return redirect('/admin')->with('message', 'Bil borttagen');
     }
+
     public function private()
     {
         if (Gate::allows('admin-only', auth()->user())) {
-            return view('create');
+            return view('createCar');
         }
         return 'Du är inte en admin!';
     }
