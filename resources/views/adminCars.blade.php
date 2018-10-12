@@ -5,6 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
           <h1>Alla Bilar</h1>
+          @if(session('message'))
+            <p>{{session('message')}}</p>
+          @endif
           @foreach ($cars as $car)
             <div class="card" style="margin-bottom: 10px;">
                 <div class="card-header"></div>
@@ -16,7 +19,7 @@
                   <div class="col-md-6">
                     <h2>{{ $car->model}}</h2>
                     Dygns kostnad: {{$car->price_per_day}}
-                    <a href="{{ url('/admin/update?car_id=' . $car->car_id)}}"><button>Uppdatera</button></a>
+                    <a href="{{ url('/admin/' . $car->car_id . '/edit')}}"><button>Uppdatera</button></a>
                   </div>
 
                 </div>
