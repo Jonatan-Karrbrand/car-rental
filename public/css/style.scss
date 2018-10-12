@@ -1,0 +1,50 @@
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66D9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+$margin: 10px;
+
+.single-car-image {
+  width: 100%;
+}
+
+.single-car-col {
+  width: 50%;
+  padding: 20px;
+
+  ul{
+    list-style-type: none;
+    padding-left: 0px;
+  }
+}
+
+.card {
+  margin-bottom: $margin;
+}
+
+.btn {
+  margin: 10px 0 10px 0;
+}
+
+h1{
+  color: $blue;
+}
+
+@media screen and (max-width: 800px) {
+  .single-car-col {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .single-car-col {
+    padding: 5px;
+  }
+}

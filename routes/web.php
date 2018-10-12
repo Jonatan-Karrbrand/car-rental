@@ -18,6 +18,8 @@ Route::resource('/admin', 'AdminController');
 Route::post('', 'AdminController@store')->name('Admin.store');
 //Route::get('/cars/{id}', 'BookingController@store');
 Route::resource('booking', 'BookingController');
+Route::resource('comments', 'CommentsController');
+
 Route::get('/', function () {
     return view('welcome');
 });

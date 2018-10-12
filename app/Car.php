@@ -38,6 +38,11 @@ class Car extends Model
       $box = ['gearbox', '=', $result['gearbox']];
     }
 
+    // if ($result['to'] == $result['from']) {
+    //   $result['from'] = '';
+    // }
+    //
+    // $result['from'] = $result['from']
 
     $cars = DB::table('cars')
       ->where('seats', '>=', $result['seats'])
@@ -50,6 +55,7 @@ class Car extends Model
       ->paginate(5);
 
     return $cars;
+
   }
 
 

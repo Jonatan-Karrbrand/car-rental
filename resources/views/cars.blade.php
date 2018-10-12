@@ -50,14 +50,14 @@
                 'Automat' => 'Automat',
                 'Manuell' => 'Manuell']
               )}}
-            
+
             </div>
             {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
 
           {!! Form::close() !!}
 
           @foreach ($cars as $car)
-            <div class="card" style="margin-bottom: 10px;">
+            <div class="card">
                 <div class="card-header"></div>
                 <div class="card-body row">
 
