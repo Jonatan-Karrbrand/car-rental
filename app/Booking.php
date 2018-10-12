@@ -22,12 +22,4 @@ class Booking extends Model
         ->get();
         return $result;
     }
-
-    public static function calcTotalPrice($id) {
-        $result = DB::table('cars')
-        ->select('cars.price_per_day')
-        ->where('cars.car_id', $id)
-        ->get();
-        return $result;
-    }
 }

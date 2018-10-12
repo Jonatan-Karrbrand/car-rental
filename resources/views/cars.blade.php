@@ -76,8 +76,9 @@
           @endforeach
         </div>
     </div>
-    <div>
+    <div class="">
       <!-- {{$cars->links()}} -->
+
     </div>
 
   </div>

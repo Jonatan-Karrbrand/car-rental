@@ -8,21 +8,22 @@ use DB;
 class Frontpage extends Model
 {
     public static function getAllAvailableCarsToday() {
-        //$todaysDate = date("Y-m-d");
-        //$TomorrowsDate = $todaysDate->modify('+1 day');
-        
-        $result = DB::table('cars')
-        ->join('bookings', 'cars.car_id', 'bookings.booking_id')
-        ->select(DB::raw(
-            "SELECT * 
-            FROM bookings
-            WHERE begin <= '2018-10-11'
-            AND end >= '2018-10-11'"
-        ))
-        ->get();
-        
+        $todaysDateStart = date("Y-m-d") . ' 00:00:00';
+        $todaysDateEnd =  date("Y-m-d") . ' 23:59:59';
+
+        $result = DB::select( DB::raw(
+            "SELECT *
+        FROM cars
+       WHERE cars.car_id NOT IN(
+          SELECT car_id
+          FROM bookings
+           WHERE bookings.booked_from <= '$todaysDateStart'
+             AND bookings.booked_to >= '$todaysDateEnd'
+             OR bookings.booked_from >= '$todaysDateStart'
+             AND bookings.booked_to <= '$todaysDateEnd')"
+        ));
+
         return $result;
+        
     }
 }
-//->whereNotBetween('bookings.booked_from', ['2018-10-10', '2018-10-11'])
-//->whereNotBetween('bookings.booked_to', ['2018-10-10', '2018-10-11'])

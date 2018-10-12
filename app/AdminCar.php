@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class AdminOnly extends Model
+class AdminCar extends Model
 {
     protected $table = 'cars';
     protected $primaryKey = 'car_id';

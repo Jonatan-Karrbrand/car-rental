@@ -15,7 +15,6 @@ class FrontpageController extends Controller
     public function index()
     {
         $availableCars = Frontpage::getAllAvailableCarsToday();
-        return $availableCars;
         return view('frontpage')->with('availableCars', $availableCars);
     }
 

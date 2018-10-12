@@ -44,6 +44,7 @@ class Car extends Model
     //
     // $result['from'] = $result['from']
 
+
     // $resultFrom = '2018-10-13';
     // $resultTo = '2018-10-16';
     // $array = [];
@@ -85,17 +86,38 @@ class Car extends Model
       AND bookings.booked_to < '2018-10-15 23:59:59')"
     ));
 
+
+    /*
+
     $cars = DB::table('cars')
       ->where('seats', '>=', $result['seats'])
       ->where('bhp', '>=', $result['bhp'])
       ->where($where[0], $where[1], $where[2])
       ->where($box[0], $box[1], $box[2])
       ->join('bookings', 'cars.car_id', 'bookings.booking_id')
+
       ->join('booked-dates', 'bookings.booking_id', 'booked-dates.booked_dates_id')
       // ->where()
       // ->whereNotBetween('bookings.booked_from', [$result['from'], $result['to']])
       // ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
       ->paginate(5);
+
+      ->whereNotBetween('bookings.booked_from', [$result['from'], $result['to']])
+      ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
+      ->paginate(5);*/
+
+      $cars = DB::select( DB::raw(
+        "SELECT *
+        FROM cars
+       WHERE cars.car_id NOT IN(
+          SELECT car_id
+          FROM bookings
+           WHERE bookings.booked_from <= '2018-10-18 00:00:00'
+             AND bookings.booked_to >= '2018-10-19 23:59:59'
+             OR bookings.booked_from >= '2018-10-18 00:00:00'
+             AND bookings.booked_to <= '2018-10-19 23:59:59')"
+    ));
+
 
     return $resultat;
 
