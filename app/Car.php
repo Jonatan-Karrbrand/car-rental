@@ -59,6 +59,7 @@ class Car extends Model
   }
 
 
+
   // get one car
   public static function getOneCar($id) {
     $result = DB::table('cars')

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\AdminOnly;
 
+use App\Car;
+use DB;
+
 
 class AdminController extends Controller
 {
@@ -116,8 +119,11 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $car = Car::find($id);
+      $car->delete();
+      return redirect('/admin')->with('message', 'Bil borttagen');
     }
+
     public function private()
     {
         if (Gate::allows('admin-only', auth()->user())) {

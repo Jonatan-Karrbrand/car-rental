@@ -16,7 +16,13 @@
                   <div class="col-md-6">
                     <h2>{{ $car->model}}</h2>
                     Dygns kostnad: {{$car->price_per_day}}
-                    <a href="{{ url('/admin/update?car_id=' . $car->car_id)}}"><button>Uppdatera</button></a>
+                    <a class="btn btn-primary" href="{{ url('/admin/update?car_id=' . $car->car_id)}}">Uppdatera</a>
+                    {!! Form::open(['action' => ['AdminController@destroy', $car->car_id] , 'method' => 'POST']) !!}
+
+                        {!! Form::hidden('_method', 'DELETE')!!}
+                        {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
+                    {!! Form::close() !!}
+
                   </div>
 
                 </div>
@@ -24,7 +30,7 @@
           @endforeach
         </div>
     </div>
-    
+
 
   </div>
 </div>
