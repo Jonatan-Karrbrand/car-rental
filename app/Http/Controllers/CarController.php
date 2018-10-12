@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Car;
+use App\Comments;
 
 class CarController extends Controller
 {
@@ -59,8 +60,14 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        $oneCar = Car::getOneCar($id);
-        return view('car', ['cars' => $oneCar]);
+      $comments = Comments::getComments($id);
+
+      $oneCar = Car::getOneCar($id);
+      
+      return view('car', [
+        'cars' => $oneCar,
+        'comments' => $comments
+      ]);
     }
 
     /**
