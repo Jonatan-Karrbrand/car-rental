@@ -18,18 +18,4 @@ class AdminOnly extends Model
 
         return $cars;
     }
-    public static function uppdateCar($request, $id)
-    {
-        $uppdateCar = DB::teable('cars')
-        ->where('id', $id)
-        ->update([
-            'model' => $request['model'],
-            'price_per_day' => $request['price_per_day'],
-            'seats' => $request['seats'], 'bhp' => $request['bhp'],
-            'car_type' => $request['car_type'],
-            'gearbox' => $request['gearbox']
-            ]);
-        
-        return $uppdateCar;
-    }
 }
