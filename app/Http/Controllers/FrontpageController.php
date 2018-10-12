@@ -3,33 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Car;
-use App\Comments;
-use App\Booking;
+use App\Frontpage;
 
-class CarController extends Controller
+class FrontpageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-      $result = $this->validate($request, [
-        'seats' => '',
-        'bhp' => '',
-        'from' => '',
-        'to' => '',
-        'type' => '',
-        'gearbox' => ''
-      ]);
-
-      $cars = Car::getAllCars($result);
-
-      return view('cars', [
-        'cars' => $cars
-      ]);
+        $availableCars = Frontpage::getAllAvailableCarsToday();
+        return $availableCars;
+        return view('frontpage')->with('availableCars', $availableCars);
     }
 
     /**
@@ -61,24 +48,7 @@ class CarController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
-      $comments = Comments::getComments($id);
-
-      $oneCar = Car::getOneCar($id);
-      
-      return view('car', [
-        'cars' => $oneCar,
-        'comments' => $comments
-      ]);
-=======
-        $bookings = Booking::getAllBookings();
-        $oneCar = Car::getOneCar($id);
-        return view('car', 
-        [
-            'cars' => $oneCar,
-            'bookings' => $bookings
-        ]);
->>>>>>> 5bfb9d06cfc1894334d7f1c90492295cd9346f81
+        //
     }
 
     /**

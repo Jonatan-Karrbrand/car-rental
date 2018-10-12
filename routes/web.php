@@ -20,6 +20,8 @@ Route::post('', 'AdminController@store')->name('Admin.store');
 Route::resource('booking', 'BookingController');
 Route::resource('comments', 'CommentsController');
 
+Route::get('/frontpage', 'FrontpageController@index');
+
 Route::get('/', function () {
     return view('welcome');
 });
