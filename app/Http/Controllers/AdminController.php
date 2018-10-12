@@ -96,9 +96,12 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        return view('update');
+        //returnar viewn update och skickar med ett id som används i update funktionen
+        return view('update', [
+            'id' => $id
+        ]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -106,9 +109,23 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //sparar datan i tabellen cars i databasen
+        $uppdateCar = AdminOnly::find($request['car_id']);
+
+        //sql querryn för uppdate
+        $uppdateCar->model = $request['model'];
+        $uppdateCar->price_per_day = $request['price_per_day'];
+        $uppdateCar->seats = $request['seats'];
+        $uppdateCar->bhp = $request['bhp'];
+        $uppdateCar->car_type = $request['car_type'];
+        $uppdateCar->gearbox = $request['gearbox'];
+        $uppdateCar->save();
+
+
+        //skickar tillbaks dig till /admin och medelar att det gick bra
+        return redirect()->action('AdminController@index')->with('message', 'Bilen uppdaterades utan problem');
     }
 
     /**

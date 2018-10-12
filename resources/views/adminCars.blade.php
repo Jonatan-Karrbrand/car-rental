@@ -5,6 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
           <h1>Alla Bilar</h1>
+          @if(session('message'))
+            <p>{{session('message')}}</p>
+          @endif
           @foreach ($cars as $car)
             <div class="card" style="margin-bottom: 10px;">
                 <div class="card-header"></div>
