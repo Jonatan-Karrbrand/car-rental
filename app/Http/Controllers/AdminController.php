@@ -16,9 +16,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $cars = Car::getCars();
+        $cars = AdminOnly::getCars();
 
-        return view('cars', [
+        return view('adminCars', [
             'cars' => $cars
         ]);
     }
@@ -93,7 +93,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('update');
     }
 
     /**
@@ -123,6 +123,6 @@ class AdminController extends Controller
         if (Gate::allows('admin-only', auth()->user())) {
             return view('create');
         }
-        return 'You are not admin!!!!';
+        return 'Du är inte en admin!';
     }
 }
