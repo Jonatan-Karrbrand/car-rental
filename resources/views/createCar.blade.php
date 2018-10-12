@@ -3,10 +3,24 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        @can('admin-only')
+        @if(Route::has('login'))
+            @auth
+            @can('admin-only')
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if(session('message'))
+            <p>{{session('message')}}</p>
+        @endif
         <div class="col-md-8">
-          <h1>Uppdatera bil</h1>
-                {!! Form::open(['route' => 'Admin.update', 'method' => 'PUT']) !!}
+          <h1>Add new cars</h1>
+                {!! Form::open(['route' => 'Admin.store', 'enctype' => 'multipart/form-data']) !!}
             <div class="form-group">
                 {!! Form::label('model', 'Bil modell') !!}
                 {!! Form::text('model') !!}
@@ -42,13 +56,20 @@
                     'Automat' => 'Automat'
                     )) !!}
             </div>
-            {!! Form::hidden('car_id', $id ) !!}
+            <div class="form-group">
+                {!! Form::label('image', 'Bild på bilen') !!}
+                {!! Form::file('image') !!}
+            </div>
 
-                {!! Form::submit('Uppdatera bil', ['class' => 'btn btn-success']) !!}
+                {!! Form::submit('Spara', ['class' => 'btn btn-success']) !!}
 
                 {!! Form::close() !!}
         </div>
-        @endcan
+         @endcan
+  @else
+    <p>Åtkomst nekad!</p>
+  @endauth
+  @endif
     </div>
 </div>
 @endsection
