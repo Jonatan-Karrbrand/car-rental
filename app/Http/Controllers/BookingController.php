@@ -27,7 +27,6 @@ class BookingController extends Controller
      */
     public function create()
     {
-
         return view('bookings.create');
     }
 
@@ -54,16 +53,21 @@ class BookingController extends Controller
 
         // The logged in users ID
         $userId = Auth::id();
-        
+        // If user is not logged in it will display an error message
+        if ($userId == NULL) {
+            echo 'Du måste vara inloggad för att genomföra en bokning.';
+            return;
+        } else {
+            // Create Booking
+            $booking = new Booking;
+            $booking->car_id = $request->input('car_id');
+            $booking->user_id = $userId;
+            $booking->booked_from = $request->input('booked_from');
+            $booking->booked_to = $request->input('booked_to');
+            $booking->total_price = $totalPrice;
+            $booking->save();
+        }
 
-        // Create Booking
-        $booking = new Booking;
-        $booking->car_id = $request->input('car_id');
-        $booking->user_id = $userId;
-        $booking->booked_from = $request->input('booked_from');
-        $booking->booked_to = $request->input('booked_to');
-        $booking->total_price = $totalPrice;
-        $booking->save();
 
         return 'Success!';
     }

@@ -18,6 +18,8 @@ Route::get('/cars/{id}', 'CarController@show');
 
 Route::resource('booking', 'BookingController');
 
+Route::get('/frontpage', 'FrontpageController@index');
+
 Route::get('/', function () {
     return view('welcome');
 });
