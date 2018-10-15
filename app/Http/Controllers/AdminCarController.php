@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\AdminCar;
+use App\Car;
 use DB;
 
 
@@ -132,15 +133,15 @@ class AdminCarController extends Controller
         if($request['geatbox'] !== null){
             $uppdateCar->gearbox = $request['gearbox'];
         }
-        if($carImage !== null){
-        $uppdateCar->image = 'images/' . $carImage;
-        }
+//        if($carImage !== null){
+  //      $uppdateCar->image = 'images/' . $carImage;
+    //    }
         //kör uppdate querryn
         $uppdateCar->save();
 
 
         //skickar tillbaks dig till /admin och medelar att det gick bra
-        return redirect()->action('AdminController@index')->with('message', 'Bilen uppdaterades utan problem');
+        return redirect()->action('AdminCarController@index')->with('message', 'Bilen uppdaterades utan problem');
     }
 
     /**
