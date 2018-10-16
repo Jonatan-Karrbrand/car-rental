@@ -14,7 +14,7 @@
 
 Route::get('/cars', 'CarController@index');
 Route::get('/cars/{id}', 'CarController@show');
-Route::resource('admin', 'AdminCarController');
+Route::resource('/admin/car', 'AdminCarController');
 Route::post('', 'AdminCarController@store')->name('Admin.store');
 Route::put('', 'AdminCarController@update')->name('Admin.update');
 //Route::get('/cars/{id}', 'BookingController@store');

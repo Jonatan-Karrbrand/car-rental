@@ -14,7 +14,7 @@ class AdminCar extends Model
     public static function getCars()
     {
         $cars = DB::table('cars')
-        ->get();
+        ->paginate(10);
 
         return $cars;
     }
