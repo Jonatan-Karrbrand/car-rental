@@ -22,11 +22,11 @@ Route::resource('comments', 'CommentsController');
 Route::get('user/{id}', 'UserController@show');
 Route::delete('user/{id}', 'UserController@destroy');
 
-Route::get('/frontpage', 'FrontpageController@index');
+Route::get('/', 'FrontpageController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 

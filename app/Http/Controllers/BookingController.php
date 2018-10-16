@@ -69,7 +69,7 @@ class BookingController extends Controller
             $booking->save();
         }
 
-      return back()->with('message', 'Du är nu bokad.');
+      return back()->with('message', 'Du har nu bokat denna bil');
     }
 
     /**
