@@ -17,9 +17,10 @@ Route::get('/cars/{id}', 'CarController@show');
 Route::resource('admin/cars', 'AdminCarController');
 Route::post('', 'AdminCarController@store')->name('Admin.store');
 Route::put('', 'AdminCarController@update')->name('Admin.update');
-//Route::get('/cars/{id}', 'BookingController@store');
 Route::resource('admin/booking', 'BookingController');
 Route::resource('comments', 'CommentsController');
+Route::get('user/{id}', 'UserController@show');
+Route::delete('user/{id}', 'UserController@destroy');
 
 Route::get('/frontpage', 'FrontpageController@index');
 
