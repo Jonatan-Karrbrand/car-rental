@@ -17,7 +17,7 @@ Route::get('/cars/{id}', 'CarController@show');
 Route::resource('/admin/cars', 'AdminCarController');
 Route::post('', 'AdminCarController@store')->name('AdminCar.store');
 Route::resource('/admin/users', 'AdminUserController');
-Route::resource('admin/booking', 'BookingController');
+Route::resource('/admin/booking', 'BookingController');
 Route::resource('comments', 'CommentsController');
 Route::get('user/{id}', 'UserController@show');
 Route::delete('user/{id}', 'UserController@destroy');
