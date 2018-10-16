@@ -14,11 +14,11 @@
 
 Route::get('/cars', 'CarController@index');
 Route::get('/cars/{id}', 'CarController@show');
-Route::resource('admin', 'AdminCarController');
+Route::resource('admin/cars', 'AdminCarController');
 Route::post('', 'AdminCarController@store')->name('Admin.store');
 Route::put('', 'AdminCarController@update')->name('Admin.update');
 //Route::get('/cars/{id}', 'BookingController@store');
-Route::resource('booking', 'BookingController');
+Route::resource('admin/booking', 'BookingController');
 Route::resource('comments', 'CommentsController');
 
 Route::get('/frontpage', 'FrontpageController@index');

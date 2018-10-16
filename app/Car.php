@@ -60,10 +60,10 @@ class Car extends Model
        WHERE cars.car_id NOT IN(
           SELECT car_id
           FROM bookings
-           WHERE bookings.booked_from <= '2018-10-18 00:00:00'
-             AND bookings.booked_to >= '2018-10-19 23:59:59'
-             OR bookings.booked_from >= '2018-10-18 00:00:00'
-             AND bookings.booked_to <= '2018-10-19 23:59:59')"
+           WHERE bookings.booked_from <= '2018-10-03 00:00:00'
+             AND bookings.booked_to >= '2018-10-11 23:59:59'
+             OR bookings.booked_from >= '2018-10-03 00:00:00'
+             AND bookings.booked_to <= '2018-10-11 23:59:59')"
     ));
 
     return $cars;

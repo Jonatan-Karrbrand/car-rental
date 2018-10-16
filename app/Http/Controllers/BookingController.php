@@ -9,6 +9,7 @@ use App\Car;
 
 class BookingController extends Controller
 {
+   
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +28,7 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view('bookings.create');
+        //return view('bookings.create');
     }
 
     /**
@@ -116,4 +117,13 @@ class BookingController extends Controller
     {
         //
     }
+
+    public function private()
+    {
+        if (Gate::allows('admin-only', auth()->user())) {
+            return view('booking.index');
+        }
+        return 'Du är inte en admin!';
+    }
+   
 }
