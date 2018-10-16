@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -43,6 +43,9 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('cars') }}">Bilar</a>
+                        </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -52,6 +55,9 @@
                                 @endif
                             </li>
                         @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('cars') }}">Bilar</a>
+                        </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ url('user/' . Auth::id()) }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -63,10 +69,25 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ url('user/' . Auth::id()) }}">
+                                      Mitt konto
+                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    @if(Route::has('login'))
+                                      @auth
+                                        @can('admin-only')
+                                          <a class="dropdown-item" href="{{ url('admin/cars') }}">
+                                            Admin-bilar
+                                          </a>
+                                          <a class="dropdown-item" href="{{ url('admin/users') }}">
+                                            Admin-användare
+                                          </a>
+                                        @endcan
+                                      @endauth
+                                    @endif
                                 </div>
                             </li>
                         @endguest

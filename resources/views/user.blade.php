@@ -3,20 +3,23 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h2>Kontouppgifter</h2>
+        <div class="col-md-8 padding-top">
+            @if(session('message'))
+                <h2 class="success-message">{{session('message')}}</h2>
+            @endif
+            <h3>Kontouppgifter</h3>
             @foreach ( $userInformation as $userInfo )
-                <h3>Användarnamn: {{ $userInfo->email }}</h3>
-                <h3>Namn: {{ $userInfo->name }}</h3>
+                <p>Användarnamn: {{ $userInfo->email }}</p>
+                <p>Namn: {{ $userInfo->name }}</p>
             @endforeach
             <br>
-            <h2>Dina bokade bilar</h2>
+            <h3>Dina bokade bilar</h3>
             @foreach ( $userBookings as $userBooking )
                 <hr>
-                <h3>Bil: {{ $userBooking->model }}</h3>
-                <h3>Bokad från: {{ $userBooking->booked_from }}</h3>
-                <h3>Bokad till: {{ $userBooking->booked_to }}</h3>
-                <h3>Toatalsumma: {{ $userBooking->total_price }}:-</h3>
+                <h4>{{ $userBooking->model }}</h4>
+                <li>Bokad från: {{ $userBooking->booked_from }}</li>
+                <li>Bokad till: {{ $userBooking->booked_to }}</li>
+                <li>Totalsumma: {{ $userBooking->total_price }}:-</li>
                 {!! Form::open(['action' => ['UserController@destroy', $userBooking->booking_id] , 'method' => 'POST']) !!}
                     {!! Form::hidden('_method', 'DELETE')!!}
                     {{Form::submit('Ta bort bokning', ['class' => 'btn btn-primary'])}}
