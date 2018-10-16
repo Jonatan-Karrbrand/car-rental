@@ -12,6 +12,13 @@ $cyan: #6cb2eb;
 
 $margin: 10px;
 
+body, html{
+  height: 100%;
+}
+h1, p {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .single-car-image {
   width: 100%;
 }
@@ -36,6 +43,33 @@ $margin: 10px;
 
 h1{
   color: $blue;
+}
+
+.hero-image{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url("photo-1535732820275-9ffd998cac22.jpg");
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 80%;
+}
+.hero-text {
+  font-size: 1.5em;
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  color: white;
+  h1{
+    font-size: 3em;
+    color: white;
+    text-align: left;
+  }
+}
+.py-4{
+  padding-top: 0 !important;
 }
 
 @media screen and (max-width: 800px) {
