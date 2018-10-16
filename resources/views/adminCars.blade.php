@@ -21,7 +21,7 @@
               <div class="col-md-6">
               <h2>{{ $car->model}}</h2>
                 Dygns kostnad: {{$car->price_per_day}}
-              <a class="btn btn-primary" href="{{ url('/admin/' . $car->car_id . '/edit')}}">Uppdatera</a>
+              <a class="btn btn-primary" href="{{ url('/admin/car/' . $car->car_id . '/edit')}}">Uppdatera</a>
                 {!! Form::open(['action' => ['AdminCarController@destroy', $car->car_id] , 'method' => 'POST']) !!}
                 {!! Form::hidden('_method', 'DELETE')!!}
                 {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
