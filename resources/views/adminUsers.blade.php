@@ -7,22 +7,19 @@
   @auth
     @can('admin-only')
     <div class="col-md-8">
-      <h1>Alla Bilar</h1>
+      <h1>Alla Användare</h1>
       @if(session('message'))
         <p>{{session('message')}}</p>
       @endif
-      @foreach ($cars as $car)
+      @foreach ($users as $user)
         <div class="card" style="margin-bottom: 10px;">
           <div class="card-header"></div>
             <div class="card-body row">
               <div class="col-md-6">
-                <img style="max-width: 300px;" src="{{$car->image}}" alt="">
-              </div>
-              <div class="col-md-6">
-              <h2>{{ $car->model}}</h2>
-                Dygns kostnad: {{$car->price_per_day}}
-              <a class="btn btn-primary" href="{{ url('/admin/cars/' . $car->car_id . '/edit')}}">Uppdatera</a>
-                {!! Form::open(['action' => ['AdminCarController@destroy', $car->car_id] , 'method' => 'POST']) !!}
+              <h2>{{ $user->name}}</h2>
+              {{$user->email}}
+              <a class="btn btn-primary" href="{{ url('/admin/users/' . $user->user_id . '/edit')}}">Uppdatera</a>
+                {!! Form::open(['action' => ['AdminUserController@destroy', $user->user_id] , 'method' => 'POST']) !!}
                 {!! Form::hidden('_method', 'DELETE')!!}
                 {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
               {!! Form::close() !!}
@@ -32,7 +29,7 @@
         </div>
       @endforeach
     </div>
-    {{ $cars->links() }}
+    {{ $users->links() }}
     @endcan
   @else
     <p>Åtkomst nekad!</p>
