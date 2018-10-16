@@ -44,22 +44,32 @@ h1, p {
 h1{
   color: $blue;
 }
-
+.success-message{
+  color: $green;
+  padding-top: 20px;
+}
+.line{
+  
+}
+#app .navbar{
+  background-color: rgba(0,0,0,0.0) !important;
+}
 .hero-image{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url("photo-1535732820275-9ffd998cac22.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.0)), url("/images/header-pic-2.jpg");
   height: 500px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  width: 80%;
+  width: 100%;
+  background-attachment: fixed;
 }
 .hero-text {
   font-size: 1.5em;
   text-align: left;
   position: absolute;
   top: 50%;
-  left: 70%;
+  left: 30%;
   transform: translate(-50%, -50%);
   color: white;
   h1{
@@ -68,10 +78,35 @@ h1{
     text-align: left;
   }
 }
-.py-4{
+.py-4 {
   padding-top: 0 !important;
 }
+.frontpage-column{
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  margin: auto;
+  // border: 1px solid rgba(0,0,0,0.7);
+  box-shadow: 5px 10px 10px rgba(0,0,0,0.2);
+  h4{
+    padding-top: 15px;
+    padding-left: 15px;
+  }
+  p{
+    padding-left: 15px;
+  }
+}
+.frontpage-section-free-cars{
+  padding: 60px 0;
+}
+.booked-text {
+  color: $red;
+}
 
+.img-300{
+  width: 300px;
+  height: 170px;
+}
 @media screen and (max-width: 800px) {
   .single-car-col {
     width: 100%;
