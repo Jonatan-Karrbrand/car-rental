@@ -67,65 +67,65 @@ class Car extends Model
     ));
 
 
-    $date = json_decode($var, true);
-    $carBookedStatus = $date;
-    foreach ($carBookedStatus as $key => $value) {
-      $thisDate = $carBookedStatus[$key]['date'];
-      $thisCar = $carBookedStatus[$key]['car_id'];
+    // $date = json_decode($var, true);
+    // $carBookedStatus = $date;
+    // foreach ($carBookedStatus as $key => $value) {
+    //   $thisDate = $carBookedStatus[$key]['date'];
+    //   $thisCar = $carBookedStatus[$key]['car_id'];
+    //
+    //   array_push($array, [$thisDate, $thisCar]);
+    //
+    //
+    // }
+    // array_push($newArray, $array);
+    //
+    //
+    //
+    //
+    //
+    //   foreach ($array as $key => $value) {
+    //
+    //     if (in_array($resultFrom, $array) || in_array($resultTo, $array)) {
+    //       echo "detta datum är bookat";
+    //       echo "<br>";
+    //       echo $value;
+    //
+    //
+    //     }
+    //     else {
+    //       echo "ej bookat";
+    //       echo "<br>";
+    //         echo $value[1];
+    //     }
+    //   }
+    //
+    //
+    // $bilar = DB::table('cars')
+    //   ->where('seats', '>=', $result['seats'])
+    //   ->where('bhp', '>=', $result['bhp'])
+    //   ->where($where[0], $where[1], $where[2])
+    //   ->where($box[0], $box[1], $box[2])
+    //   ->leftJoin('bookings', 'cars.car_id', 'bookings.booking_id')
+    //   // ->leftJoin('booked_dates', 'bookings.booking_id', 'booked_dates.booking_id')
+    //
+    //   // ->where(function($query) use ($resultFrom ,$theseCarsAreBooked)
+    //   //   {
+    //   //     $query->where('booked_dates.car_id' ,'!=', '1')
+    //   //       ->orWhere('booked_dates.date', '!=',  $resultFrom)  ;
+    //   //   })
+    //
+    //   ->orWhere('bookings.car_id', '=',  null)
+    //   // ->whereNotIn('booked_dates.date', $resultFrom)
 
-      array_push($array, [$thisDate, $thisCar]);
-
-
-    }
-    array_push($newArray, $array);
-
-
-
-
-
-      foreach ($array as $key => $value) {
-
-        if (in_array($resultFrom, $array) || in_array($resultTo, $array)) {
-          echo "detta datum är bookat";
-          echo "<br>";
-          echo $value;
-
-
-        }
-        else {
-          echo "ej bookat";
-          echo "<br>";
-            echo $value[1];
-        }
-      }
-
-
-    $bilar = DB::table('cars')
-      ->where('seats', '>=', $result['seats'])
-      ->where('bhp', '>=', $result['bhp'])
-      ->where($where[0], $where[1], $where[2])
-      ->where($box[0], $box[1], $box[2])
-      ->leftJoin('bookings', 'cars.car_id', 'bookings.booking_id')
-      // ->leftJoin('booked_dates', 'bookings.booking_id', 'booked_dates.booking_id')
-
-      // ->where(function($query) use ($resultFrom ,$theseCarsAreBooked)
-      //   {
-      //     $query->where('booked_dates.car_id' ,'!=', '1')
-      //       ->orWhere('booked_dates.date', '!=',  $resultFrom)  ;
-      //   })
-
-      ->orWhere('bookings.car_id', '=',  null)
-      // ->whereNotIn('booked_dates.date', $resultFrom)
-
-
-
-      // ->whereNotBetween('bookings.booked_from', [$result['from'], $result['to']])
-      // ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
 
 
       // ->whereNotBetween('bookings.booked_from', [$result['from'], $result['to']])
       // ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
-      ->paginate(5);
+
+
+      // ->whereNotBetween('bookings.booked_from', [$result['from'], $result['to']])
+      // ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
+      // ->paginate(5);
 
 
 // SLUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -166,17 +166,17 @@ class Car extends Model
       ->whereNotBetween('bookings.booked_to', [$result['from'], $result['to']])
       ->paginate(5);*/
 
-    //   $cars = DB::select( DB::raw(
-    //     "SELECT *
-    //     FROM cars
-    //    WHERE cars.car_id NOT IN(
-    //       SELECT car_id
-    //       FROM bookings
-    //        WHERE bookings.booked_from <= '2018-10-10 00:00:00'
-    //          AND bookings.booked_to >= '2018-10-11 23:59:59'
-    //          OR bookings.booked_from >= '2018-10-10 00:00:00'
-    //          AND bookings.booked_to <= '2018-10-11 23:59:59')"
-    // ));
+      $cars = DB::select( DB::raw(
+        "SELECT *
+        FROM cars
+       WHERE cars.car_id NOT IN(
+          SELECT car_id
+          FROM bookings
+           WHERE bookings.booked_from <= '2018-10-10 00:00:00'
+             AND bookings.booked_to >= '2018-10-11 23:59:59'
+             OR bookings.booked_from >= '2018-10-10 00:00:00'
+             AND bookings.booked_to <= '2018-10-11 23:59:59')"
+    ));
 
   //   $cars2 = DB::select( DB::raw(
   //     "SELECT *
@@ -190,7 +190,7 @@ class Car extends Model
   // ));
 
 
-    return $bilar;
+    return $cars;
 
   }
 
