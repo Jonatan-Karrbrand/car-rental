@@ -95,9 +95,16 @@ class AdminCarController extends Controller
      */
     public function edit($id)
     {
+        $car = AdminCar::find($id);
+
         //returnar viewn update och skickar med ett id som används i update funktionen
+        //skickar med värdena som redan finns så dem används som placeholders i formuläret
         return view('updateCar', [
-            'id' => $id
+            'carID' => $id,
+            'model' => $car['model'],
+            'price_per_day' => $car['price_per_day'],
+            'seats' => $car['seats'],
+            'bhp' => $car['bhp']
         ]);
     }
     
@@ -108,10 +115,10 @@ class AdminCarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         //hämtar den idt på bilen
-        $uppdateCar = AdminCar::find($request['car_id']);
+        $uppdateCar = AdminCar::find($id);
 
         //sql querryn för uppdate
         //kollar om alla värdena är satta och om dem inte är det så används dem inte i uppdate querryn
@@ -139,8 +146,7 @@ class AdminCarController extends Controller
         //kör uppdate querryn
         $uppdateCar->save();
 
-
-        //skickar tillbaks dig till /admin och medelar att det gick bra
+        //skickar tillbaks dig till /admin/cars och medelar att det gick bra
         return redirect()->action('AdminCarController@index')->with('message', 'Bilen uppdaterades utan problem');
     }
 
@@ -152,9 +158,9 @@ class AdminCarController extends Controller
      */
     public function destroy($id)
     {
-      $car = Car::find($id);
-      $car->delete();
-      return redirect('/admin')->with('message', 'Bil borttagen');
+      $user = Car::find($id);
+      $user->delete();
+      return redirect('/admin/cars')->with('message', 'Bil borttagen');
     }
 
     public function private()

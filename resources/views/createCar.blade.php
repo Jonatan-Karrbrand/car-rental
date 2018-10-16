@@ -20,7 +20,7 @@
         @endif
         <div class="col-md-8">
           <h1>Add new cars</h1>
-                {!! Form::open(['route' => 'Admin.store', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(['route' => 'AdminCar.store', 'enctype' => 'multipart/form-data']) !!}
             <div class="form-group">
                 {!! Form::label('model', 'Bil modell') !!}
                 {!! Form::text('model') !!}
