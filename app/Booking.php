@@ -14,12 +14,11 @@ class Booking extends Model
     // No timestamps
     public $timestamps = false;
 
-    public static function getAllBookings($id) {
+    public static function getAllBookings() {
         $result = DB::table('bookings')
         ->join('cars', 'bookings.car_id', '=', 'cars.car_id')
         ->join('users', 'bookings.user_id', '=', 'users.user_id')
-        ->select('cars.car_id', 'cars.model', 'users.email', 'bookings.total_price', 'bookings.booked_from', 'bookings.booked_to', 'bookings.timestamp')
-        ->where('cars.car_id', $id)
+        ->select('bookings.booking_id', 'cars.car_id', 'cars.model', 'users.email', 'bookings.total_price', 'bookings.booked_from', 'bookings.booked_to', 'bookings.timestamp')
         ->get();
         return $result;
     }
