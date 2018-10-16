@@ -77,7 +77,7 @@
         </div>
     </div>
     <div class="">
-      <!-- {{$cars->links()}} -->
+    
 
     </div>
 
