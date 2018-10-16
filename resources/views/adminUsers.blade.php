@@ -6,7 +6,7 @@
   @if(Route::has('login'))
   @auth
     @can('admin-only')
-    <div class="col-md-8">
+    <div class="col-md-8 padding-top">
       <h1>Alla Användare</h1>
       @if(session('message'))
         <p>{{session('message')}}</p>
@@ -26,8 +26,8 @@
               </div>
             </div>
           </div>
+          @endforeach
         </div>
-      @endforeach
     </div>
     {{ $users->links() }}
     @endcan
