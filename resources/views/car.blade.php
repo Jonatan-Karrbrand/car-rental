@@ -31,6 +31,10 @@
                     @include('bookings.create')
                   </div>
                   <div class="col-xs-6 single-car-col">
+                    <h2>Betyg</h2>
+                    @include('createRating')
+                  </div>
+                  <div class="col-xs-6 single-car-col">
                     <h2>Kommentarer</h2>
                     @if (Auth::check())
                       @include('components.comments')

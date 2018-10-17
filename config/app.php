@@ -2,6 +2,14 @@
 
 return [
 
+    'providers' => [
+
+
+
+        willvincent\Rateable\RateableServiceProvider::class,
+
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

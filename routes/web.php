@@ -20,6 +20,7 @@ Route::put('', 'AdminCarController@update')->name('Admin.update');
 //Route::get('/cars/{id}', 'BookingController@store');
 Route::resource('booking', 'BookingController');
 Route::resource('comments', 'CommentsController');
+Route::resource('rating', 'RatingController');
 
 Route::get('/frontpage', 'FrontpageController@index');
 
