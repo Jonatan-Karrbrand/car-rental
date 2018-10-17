@@ -189,8 +189,29 @@ class Car extends Model
   //     AND booked_dates.car_id != $theseCarsAreBooked[0]"
   // ));
 
+  // $cars3 = DB::select(DB::raw(
+  //   "SELECT *
+  //   FROM `bookings`
+  //   right JOIN cars ON bookings.car_id = cars.car_id
+  //   WHERE
+  //     (('2018-10-08' < booked_from)
+  //     OR ('2018-10-08' > booked_to)
+  //     OR (bookings.car_id IS NULL))"
+  //   ));
 
-    return $cars;
+    $bilar = DB::table('bookings')
+      ->rightJoin('cars', 'bookings.car_id', 'cars.car_id')
+      ->where(function ($query) use ($result) {
+              $query->where('bookings.booked_from', '>', $result['to'])
+                    ->orWhere('bookings.booked_to', '<', $result['from'])
+                    ->orWhere('bookings.car_id', '=', null);
+          })
+      ->get();
+
+
+    return $bilar;
+
+
 
   }
 

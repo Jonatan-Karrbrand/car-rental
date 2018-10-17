@@ -19,10 +19,12 @@
               <h2>{{ $user->name}}</h2>
               {{$user->email}}
               <a class="btn btn-primary" href="{{ url('/admin/users/' . $user->user_id . '/edit')}}">Uppdatera</a>
+              <div class="form-button">
                 {!! Form::open(['action' => ['AdminUserController@destroy', $user->user_id] , 'method' => 'POST']) !!}
                 {!! Form::hidden('_method', 'DELETE')!!}
                 {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
               {!! Form::close() !!}
+              </div>
               </div>
             </div>
           </div>

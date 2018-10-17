@@ -20,12 +20,14 @@
               </div>
               <div class="col-md-6 single-car-column">
                 <h2><a href="/cars/{{$car->car_id}}">{{ $car->model}}</a></h2>
-                
+
                 <a class="btn btn-primary" href="{{ url('/admin/cars/' . $car->car_id . '/edit')}}">Uppdatera</a>
+                  <div class="form-button">
                   {!! Form::open(['action' => ['AdminCarController@destroy', $car->car_id] , 'method' => 'POST']) !!}
                   {!! Form::hidden('_method', 'DELETE')!!}
                   {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
-                {!! Form::close() !!}
+                  {!! Form::close() !!}
+                </div>
               </div>
             </div>
           </div>
