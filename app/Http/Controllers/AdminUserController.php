@@ -16,8 +16,10 @@ class AdminUserController extends Controller
      */
     public function index()
     {
+        //hämtar alla användare
         $users = AdminUser::getUsers();
 
+        //retunerar adminUsers.blade som listar alla användare
         return view('adminUsers', [
             'users' => $users
         ]);
@@ -65,6 +67,7 @@ class AdminUserController extends Controller
     {
         //hittar idt på användaren
         $id = AdminUser::find($id);
+        
         //returnar viewn update och skickar med ett id som används i update funktionen
         //skickar med värdena som redan finns så dem används som placeholders i formuläret
         return view('updateUser', [

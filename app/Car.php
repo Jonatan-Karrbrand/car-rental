@@ -7,10 +7,11 @@ use DB;
 
 class Car extends Model
 {
+  //primary key
   protected $primaryKey = "car_id";
 
   public static function getAllCars($result) {
-
+    //om $result är tom någonstans så sätts ett standard värde
     if (!isset($result['seats'])) {
       $result['seats'] = 1;
     }
@@ -18,12 +19,13 @@ class Car extends Model
       $result['bhp'] = 1;
     }
     if (!isset($result['from'])) {
-      $result['from'] = '2018-10-08';
+      $result['from'] = date('Y-m-d');
     }
     if (!isset($result['to'])) {
-      $result['to'] = '2018-10-08';
+      $result['to'] = date('Y-m-d');
     }
 
+    
     if (!isset($result['type']) || $result['type'] == 'alla') {
         $where = ['bhp', '>=', $result['bhp']];
     }

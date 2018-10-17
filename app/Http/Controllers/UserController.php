@@ -16,8 +16,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        //hämtar användar information ifrån en användare och alla bokningar som den användaren gjort 
         $userInformation = CarUser::getUser($id);
         $userBookings = CarUser::getUserBookings($id);
+        //reutnerar user.blade och listar användar informationen och alla bokningar
         return view('user')->with('userInformation', $userInformation)->with('userBookings', $userBookings);
     }
 
@@ -29,6 +31,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        //hämtar idt för en bokning och tar bort den bokningen ifrån databasen
         $booking = Booking::find($id);
         $booking->delete();
         return back()->with('message', 'Bokning borttagen');

@@ -10,20 +10,21 @@ class CommentsController extends Controller
 {
   public function index($id)
   {
+    //hämtar alla kommentarer för just en bil
     $comments = Comments::getComments($id);
-    dd($comments);
-    exit();
+    //retunerar car.blade med alla kommentarer till bilen
     return view('car', ['comments' => $comments]);
   }
   public function store(Request $request)
   {
+    //validerar komentaren
     $this->validate($request, [
         'comment' => 'required'
     ]);
 
     // The logged in users ID
     $userId = Auth::id();
-
+    //skapar querryn för en komentar och sparar den i databasen
     $comment = new Comments;
     $comment->car_id = $request->input('car_id');
     $comment->user_id = $userId;

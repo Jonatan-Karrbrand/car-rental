@@ -18,7 +18,9 @@ class BookingController extends Controller
      */
     public function index()
     {
+        //hämtar alla bokningar
         $bookings = Booking::getAllBookings();
+        //retunerar index.blade som liggar i bookings mappen som listar alla bokningar
         return view('bookings.index')->with('bookings', $bookings);
     }
 
@@ -29,7 +31,7 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //return view('bookings.create');
+        //
     }
 
     /**
@@ -131,13 +133,16 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
+        //hittar idt
         $booking = Booking::find($id);
+        //deletar bokningen i databasen
         $booking->delete();
         return back()->with('message', 'Bokning borttagen');
     }
 
     public function private()
     {
+        //kollar om man är admin och om man är det så retuneras createCar viewn eller så får man ett medelande att man inte är admin
         if (Gate::allows('admin-only', auth()->user())) {
             return view('booking.index');
         }
