@@ -15,6 +15,7 @@ class Booking extends Model
     public $timestamps = false;
 
     public static function getAllBookings() {
+        //hämtar alla bokningar
         $result = DB::table('bookings')
         ->join('cars', 'bookings.car_id', '=', 'cars.car_id')
         ->join('users', 'bookings.user_id', '=', 'users.user_id')

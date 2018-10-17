@@ -6,7 +6,7 @@
   @if(Route::has('login'))
   @auth
     @can('admin-only')
-    <div class="col-md-8">
+    <div class="col-md-8 padding-top">
       <h1>Alla Användare</h1>
       @if(session('message'))
         <p>{{session('message')}}</p>
@@ -19,15 +19,17 @@
               <h2>{{ $user->name}}</h2>
               {{$user->email}}
               <a class="btn btn-primary" href="{{ url('/admin/users/' . $user->user_id . '/edit')}}">Uppdatera</a>
+              <div class="form-button">
                 {!! Form::open(['action' => ['AdminUserController@destroy', $user->user_id] , 'method' => 'POST']) !!}
                 {!! Form::hidden('_method', 'DELETE')!!}
                 {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
               {!! Form::close() !!}
               </div>
+              </div>
             </div>
           </div>
+          @endforeach
         </div>
-      @endforeach
     </div>
     {{ $users->links() }}
     @endcan

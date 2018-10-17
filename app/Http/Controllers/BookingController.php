@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Booking;
 use App\Car;
+use DB;
 
 class BookingController extends Controller
 {
@@ -17,7 +18,9 @@ class BookingController extends Controller
      */
     public function index()
     {
+        //hämtar alla bokningar
         $bookings = Booking::getAllBookings();
+        //retunerar index.blade som liggar i bookings mappen som listar alla bokningar
         return view('bookings.index')->with('bookings', $bookings);
     }
 
@@ -51,25 +54,38 @@ class BookingController extends Controller
             'booked_from' => 'required',
             'booked_to' => 'required'
         ]);
+        $id = $request->input('car_id');
+        $from = $request->input('booked_from');
+        $to = $request->input('booked_to');
 
-        // The logged in users ID
-        $userId = Auth::id();
-        // If user is not logged in it will display an error message
-        if ($userId == NULL) {
-            echo 'Du måste vara inloggad för att genomföra en bokning.';
-            return;
-        } else {
-            // Create Booking
-            $booking = new Booking;
-            $booking->car_id = $request->input('car_id');
-            $booking->user_id = $userId;
-            $booking->booked_from = $request->input('booked_from');
-            $booking->booked_to = $request->input('booked_to');
-            $booking->total_price = $totalPrice;
-            $booking->save();
-        }
+        $bilar = DB::table('bookings')
+          ->rightJoin('cars', 'bookings.car_id', 'cars.car_id')
+          ->where('cars.car_id', $id)
+          ->where(function ($query) use ($to, $from) {
+              $query->where('bookings.booked_from', '>', $to)
+                    ->orWhere('bookings.booked_to', '<', $from)
+                    ->orWhere('bookings.car_id', '=', null);
+                  })
+          ->get();
 
-      return back()->with('message', 'Du har nu bokat denna bil');
+
+          if ($bilar) {
+            return back()->with('message', 'Denna bil är bokad detta datum');
+          }
+          else {
+            // The logged in users ID
+            $userId = Auth::id();
+              // Create Booking
+              $booking = new Booking;
+              $booking->car_id = $request->input('car_id');
+              $booking->user_id = $userId;
+              $booking->booked_from = $request->input('booked_from');
+              $booking->booked_to = $request->input('booked_to');
+              $booking->total_price = $totalPrice;
+              $booking->save();
+
+              return back()->with('message', 'Du har nu bokat denna bil');
+          }
     }
 
     /**
@@ -114,13 +130,16 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
+        //hittar idt
         $booking = Booking::find($id);
+        //deletar bokningen i databasen
         $booking->delete();
         return back()->with('message', 'Bokning borttagen');
     }
 
     public function private()
     {
+        //kollar om man är admin och om man är det så retuneras createCar viewn eller så får man ett medelande att man inte är admin
         if (Gate::allows('admin-only', auth()->user())) {
             return view('booking.index');
         }

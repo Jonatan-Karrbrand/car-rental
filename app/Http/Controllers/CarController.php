@@ -61,11 +61,12 @@ class CarController extends Controller
      */
     public function show($id)
     {
-
+      //hämtar alla kommentarer, idt på en bil och alla bokningar
       $comments = Comments::getComments($id);
       $oneCar = Car::getOneCar($id);
       $bookings = Booking::getCarBookings($id);
 
+      //retunerar car.blade med alla kommentarer och bokningar som tillhör just den bilen
       return view('car', [
         'cars' => $oneCar,
         'comments' => $comments,
