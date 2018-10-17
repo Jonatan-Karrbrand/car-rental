@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10 frontpage-section-free-cars">
+        <div class="col-md-12 frontpage-section-free-cars">
             <h2>LEDIGA BILAR IDAG</h2>
             <div class="row">
 
@@ -24,6 +24,10 @@
               <p>Dygns kostnad {{ $availableCar->price_per_day }}Kr</p>
             </div>
             @endforeach
+
+          </div>
+          <div class="padding-top">
+            <a href="/cars" class="btn btn-primary">Se fler</a>
           </div>
         </div>
     </div>

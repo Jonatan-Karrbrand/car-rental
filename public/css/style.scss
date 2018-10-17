@@ -27,10 +27,12 @@ h1, p {
   width: 200px;
 }
 .form-button{
-  width: 200px;
+  width: 50%;
   float: right;
 }
-
+.less-padding{
+  padding: 10px;
+}
 .single-car-col {
   width: 50%;
   padding: 20px;
@@ -40,6 +42,12 @@ h1, p {
     padding-left: 0px;
   }
 }
+.single-car-column {
+  p,a {
+    padding-left: 30px !important;
+  }
+}
+
 
 .card {
   margin-bottom: $margin;
@@ -55,6 +63,9 @@ h1{
 .success-message{
   color: $green;
   padding-top: 20px;
+}
+.red{
+  color: $red;
 }
 .padding-top{
   padding-top: 20px;
@@ -94,8 +105,8 @@ h1{
   height: 300px;
   overflow: hidden;
   margin: auto;
-  // border: 1px solid rgba(0,0,0,0.7);
   box-shadow: 5px 10px 10px rgba(0,0,0,0.2);
+  transition: all .2s ease-in-out;
   h4{
     padding-top: 15px;
     padding-left: 15px;
@@ -103,6 +114,9 @@ h1{
   p{
     padding-left: 15px;
   }
+}
+.frontpage-column:hover{
+  transform: scale(1.1);
 }
 .frontpage-section-free-cars{
   padding: 60px 0;

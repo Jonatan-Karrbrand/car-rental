@@ -14,11 +14,11 @@
       @foreach ($cars as $car)
         <div class="card">
           <div class=""></div>
-            <div class="card-body row">
-              <div class="col-md-6 single-car-column">
-                <img style="max-width: 200px;" src="{{$car->image}}" alt="">
+            <div class="card-body row less-padding">
+              <div class="col-md-6 single-car-col">
+                <img style="max-width: 200px;" src="{{asset($car->image)}}" alt="">
               </div>
-              <div class="col-md-6 single-car-column">
+              <div class="col-md-6 single-car-col">
                 <h2><a href="/cars/{{$car->car_id}}">{{ $car->model}}</a></h2>
 
                 <a class="btn btn-primary" href="{{ url('/admin/cars/' . $car->car_id . '/edit')}}">Uppdatera</a>

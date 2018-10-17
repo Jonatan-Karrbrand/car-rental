@@ -49,6 +49,7 @@ class Car extends Model
                 ->orWhere('bookings.booked_to', '<', $result['from'])
                 ->orWhere('bookings.car_id', '=', null);
               })
+      ->groupBy('cars.car_id')
       ->paginate(5);
 
     return $bilar;

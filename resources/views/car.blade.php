@@ -7,10 +7,14 @@
     @if(session('message'))
       <h2 class="success-message">{{session('message')}}</h2>
     @endif
+    @if(session('fail-message'))
+      <h2 class="success-message red">{{session('fail-message')}}</h2>
+    @endif
+
     <div class="row">
 
       <div class="col-xs-6 single-car-col">
-        <img style="max-width: 500px;" src="{{asset($car->image)}}" alt="">
+        <img style="max-width: 100%;" src="{{asset($car->image)}}" alt="">
       </div>
 
       <div class="col-xs-6 single-car-col">
