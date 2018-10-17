@@ -1,4 +1,3 @@
-
 @if (Auth::check())
   {!! Form::open(['action' => 'BookingController@store', 'method' => 'POST']) !!}
       {{Form::label('booked from', 'Från: ')}}

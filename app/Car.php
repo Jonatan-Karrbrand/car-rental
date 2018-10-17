@@ -39,20 +39,23 @@ class Car extends Model
     else {
       $box = ['gearbox', '=', $result['gearbox']];
     }
-   
+
     $bilar = DB::table('bookings')
       ->rightJoin('cars', 'bookings.car_id', 'cars.car_id')
+      ->where('seats', '>=', $result['seats'])
+      ->where('bhp', '>=', $result['bhp'])
+      ->where($where[0], $where[1], $where[2])
+      ->where($box[0], $box[1], $box[2])
       ->where(function ($query) use ($result) {
-              $query->where('bookings.booked_from', '>', $result['to'])
-                    ->orWhere('bookings.booked_to', '<', $result['from'])
-                    ->orWhere('bookings.car_id', '=', null);
-          })
-      ->get();
-
+          $query->where('bookings.booked_from', '>', $result['to'])
+                ->orWhere('bookings.booked_to', '<', $result['from'])
+                ->orWhere('bookings.car_id', '=', null);
+              })
+      ->paginate(5);
 
     return $bilar;
-
   }
+
   // get one car
   public static function getOneCar($id) {
     $result = DB::table('cars')
