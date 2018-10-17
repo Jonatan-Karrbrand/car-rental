@@ -61,12 +61,12 @@
                 <div class="card-header"></div>
                 <div class="card-body row">
 
-                  <div class="col-md-6">
+                  <div class="col-md-6 single-car-column">
                     <img style="max-width: 300px;" src="{{$car->image}}" alt="">
                   </div>
 
-                  <div class="col-md-6">
-                    <h2>{{ $car->model}}</h2>
+                  <div class="col-md-6 single-car-column">
+                    <h2><a href="/cars/{{$car->car_id}}">{{ $car->model}}</a></h2>
                     Dygns kostnad: {{$car->price_per_day}}
                     <a href="/cars/{{$car->car_id}}">Mer info</a>
                   </div>
@@ -77,8 +77,7 @@
         </div>
     </div>
     <div class="">
-    
-
+      
     </div>
 
   </div>

@@ -64,7 +64,7 @@ class CarController extends Controller
 
       $comments = Comments::getComments($id);
       $oneCar = Car::getOneCar($id);
-      $bookings = Booking::getAllBookings();
+      $bookings = Booking::getAllBookings($id);
 
       return view('car', [
         'cars' => $oneCar,

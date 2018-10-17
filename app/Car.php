@@ -38,19 +38,19 @@ class Car extends Model
       $box = ['gearbox', '=', $result['gearbox']];
     }
    
-    $to = $result['to'];
-    $from = $result['from'];
-    $cars = DB::select(DB::raw(
-      "SELECT *
-      FROM `bookings`
-      right JOIN cars ON bookings.car_id = cars.car_id
-      WHERE
-        (($to < booked_from)
-        OR ($from > booked_to)
-        OR (bookings.car_id IS NULL))"
-    ));
-    dd($cars);
-    return $cars;
+    $bilar = DB::table('bookings')
+      ->rightJoin('cars', 'bookings.car_id', 'cars.car_id')
+      ->where(function ($query) use ($result) {
+              $query->where('bookings.booked_from', '>', $result['to'])
+                    ->orWhere('bookings.booked_to', '<', $result['from'])
+                    ->orWhere('bookings.car_id', '=', null);
+          })
+      ->get();
+
+
+    return $bilar;
+
+
 
   }
 

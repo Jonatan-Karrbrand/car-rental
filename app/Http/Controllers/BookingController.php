@@ -9,7 +9,7 @@ use App\Car;
 
 class BookingController extends Controller
 {
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +46,7 @@ class BookingController extends Controller
         $dateDifference = floor($difference/(60*60*24));
         // Plus at the end because I want to include price for the initial day aswell
         $totalPrice = $request->price_per_day * $dateDifference + $request->price_per_day;
-        
+
         $this->validate($request, [
             'booked_from' => 'required',
             'booked_to' => 'required'
@@ -69,8 +69,7 @@ class BookingController extends Controller
             $booking->save();
         }
 
-
-        return 'Success!';
+      return back()->with('message', 'Du har nu bokat denna bil');
     }
 
     /**
@@ -115,7 +114,9 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $booking = Booking::find($id);
+        $booking->delete();
+        return back()->with('message', 'Bokning borttagen');
     }
 
     public function private()
@@ -125,5 +126,5 @@ class BookingController extends Controller
         }
         return 'Du är inte en admin!';
     }
-   
+
 }
