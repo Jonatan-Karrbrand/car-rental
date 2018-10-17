@@ -13,6 +13,7 @@ class AdminCar extends Model
 
     public static function getCars()
     {
+        //hämtar alla bilar ifrån cars tabellen och listar 20 bilar på en sida
         $cars = DB::table('cars')
         ->paginate(20);
 

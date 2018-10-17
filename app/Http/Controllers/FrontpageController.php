@@ -14,7 +14,9 @@ class FrontpageController extends Controller
      */
     public function index()
     {
+        //hämtar alla bilar som är lediga idag
         $availableCars = Frontpage::getAllAvailableCarsToday();
+        //retunerar frontpage.blade och listar alla bilar som är lediga idag
         return view('frontpage')->with('availableCars', $availableCars);
     }
 
