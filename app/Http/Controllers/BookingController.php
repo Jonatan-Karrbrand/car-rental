@@ -73,7 +73,7 @@ class BookingController extends Controller
 
 
           if (!isset($bilar[0])) {
-            return back()->with('fail-message', 'Denna bil är bokad detta datum');
+            return back()->with('fail-message', 'Denna bil är redan bokad detta datum');
           }
           else {
             // The logged in users ID
