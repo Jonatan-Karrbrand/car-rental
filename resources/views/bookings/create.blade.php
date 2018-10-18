@@ -8,7 +8,7 @@
       {!! Form::hidden('car_id', $car->car_id) !!}
       {!! Form::hidden('price_per_day', $car->price_per_day) !!}
 
-      {{Form::submit('Boka bil')}}
+      {{Form::submit('Boka bil' , ['class' => 'btn btn-primary'])}}
   {!! Form::close() !!}
 @else
   <p>Du behöver logga in för att boka</p>

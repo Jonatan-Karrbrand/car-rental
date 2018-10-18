@@ -100,6 +100,7 @@ class CarController extends Controller
       $userVoted = Ratings::getUserVoted($id);
       $userId = Auth::id();
       $notVoted = true;
+      $bookings = Booking::getCarBookings($id);
 
       //kollar om användaren har röstat på bilen
       if($userVoted !== null){

@@ -13,18 +13,17 @@
       @endif
       @foreach ($users as $user)
         <div class="card" style="margin-bottom: 10px;">
-          <div class="card-header"></div>
             <div class="card-body row">
-              <div class="col-md-6">
+              <div class="col-md-10">
               <h2>{{ $user->name}}</h2>
               {{$user->email}}
-              <a class="btn btn-primary" href="{{ url('/admin/users/' . $user->user_id . '/edit')}}">Uppdatera</a>
               <div class="form-button">
+              <a class="btn btn-primary" href="{{ url('/admin/users/' . $user->user_id . '/edit')}}">Uppdatera</a>
                 {!! Form::open(['action' => ['AdminUserController@destroy', $user->user_id] , 'method' => 'POST']) !!}
                 {!! Form::hidden('_method', 'DELETE')!!}
                 {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
               {!! Form::close() !!}
-              </div>
+        </div>
               </div>
             </div>
           </div>

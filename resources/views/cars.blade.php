@@ -63,7 +63,7 @@
 
                   <div class="col-md-6 single-car-column">
                     <h2><a href="/cars/{{$car->car_id}}">{{ $car->model}}</a></h2>
-                    Dygns kostnad: {{$car->price_per_day}}
+                    <p>Dygns kostnad: {{$car->price_per_day}}</p>
                     <a href="/cars/{{$car->car_id}}">Mer info</a>
                   </div>
 

@@ -85,6 +85,9 @@
                                           <a class="dropdown-item" href="{{ url('admin/users') }}">
                                             Admin-användare
                                           </a>
+                                          <a class="dropdown-item" href="{{ url('admin/booking') }}">
+                                            Admin-bookningar
+                                          </a>
                                         @endcan
                                       @endauth
                                     @endif

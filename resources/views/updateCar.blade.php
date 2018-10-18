@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container padding-top">
     <div class="row justify-content-center">
      @if(Route::has('login'))
   @auth
@@ -24,7 +24,7 @@
             <div class="form-group">
                 {!! Form::label('bhp', 'Hästkrafter') !!}
                 {!! Form::number('bhp', null, array('placeholder'=>$bhp )) !!}
-            </div>    
+            </div>
             <div class="form-group">
                 {!! Form::label('car_type', 'Bil typ') !!}
                 {!! Form::select('car_type', array(

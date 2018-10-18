@@ -31,7 +31,7 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //return view('bookings.create');
+        //
     }
 
     /**
@@ -59,18 +59,21 @@ class BookingController extends Controller
         $to = $request->input('booked_to');
 
         $bilar = DB::table('bookings')
+        ->select('bookings.booked_from', 'bookings.booked_to')
           ->rightJoin('cars', 'bookings.car_id', 'cars.car_id')
-          ->where('cars.car_id', $id)
           ->where(function ($query) use ($to, $from) {
               $query->where('bookings.booked_from', '>', $to)
                     ->orWhere('bookings.booked_to', '<', $from)
                     ->orWhere('bookings.car_id', '=', null);
                   })
+          ->where('cars.car_id', '=', $id)
           ->get();
 
+          $var = json_decode($bilar, true);
 
-          if ($bilar) {
-            return back()->with('message', 'Denna bil är bokad detta datum');
+
+          if (!isset($bilar[0])) {
+            return back()->with('fail-message', 'Denna bil är redan bokad detta datum');
           }
           else {
             // The logged in users ID
