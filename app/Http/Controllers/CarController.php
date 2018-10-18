@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Car;
 use App\Comments;
 use App\Booking;
+use App\Ratings;
 
 class CarController extends Controller
 {
@@ -50,7 +52,35 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // The logged in users ID
+        $userId = Auth::id();
+
+        //kollar om det var comment som skickades med i requesten
+        if(isset($request['comment'])){
+            //validerar komentaren
+            $this->validate($request, [
+                'comment' => 'required'
+            ]);
+
+            //skapar querryn för en komentar och sparar den i databasen
+            $comment = new Comments;
+            $comment->car_id = $request->input('car_id');
+            $comment->user_id = $userId;
+            $comment->timestamp = '2018-10-03 11:50:10';
+            $comment->comment = $request->input('comment');
+            $comment->save();
+        }
+
+        //kollar om det var rating som skickades med i requesten
+        if(isset($request['rating'])){
+                //skapar querryn för en rating och sparar den i databasen
+                $rating = new Ratings;
+                $rating->user_id = $userId;
+                $rating->car_id = $request->input('car_id');
+                $rating->rating = $request->input('rating');
+                $rating->save();
+        }
+        return back();
     }
 
     /**
@@ -61,16 +91,29 @@ class CarController extends Controller
      */
     public function show($id)
     {
-      //hämtar alla kommentarer, idt på en bil och alla bokningar
+      //hämtar alla kommentarer, idt på en bil och alla bokningar och hämtar ratingen på bilen
       $comments = Comments::getComments($id);
       $oneCar = Car::getOneCar($id);
       $bookings = Booking::getAllBookings($id);
+      $rating = round(Ratings::getRating($id), 1, PHP_ROUND_HALF_UP);
+      //hämtar användar idt som tillhör en bil med rating
+      $userVoted = Ratings::getUserVoted($id);
+      $userId = Auth::id();
+      $notVoted = true;
 
+      //kollar om användaren har röstat på bilen
+      if($userVoted !== null){
+          if($userVoted->user_id == $userId){
+              $notVoted = false;
+            }
+        }
       //retunerar car.blade med alla kommentarer och bokningar som tillhör just den bilen
       return view('car', [
         'cars' => $oneCar,
         'comments' => $comments,
-        'bookings' => $bookings
+        'bookings' => $bookings,
+        'rating' => $rating,
+        'notVoted' => $notVoted
       ]);
     }
 

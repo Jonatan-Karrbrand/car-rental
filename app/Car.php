@@ -25,7 +25,7 @@ class Car extends Model
       $result['to'] = date('Y-m-d');
     }
 
-    
+    //sätter standard variabler ifall inget skickas med
     if (!isset($result['type']) || $result['type'] == 'alla') {
         $where = ['bhp', '>=', $result['bhp']];
     }
@@ -40,6 +40,7 @@ class Car extends Model
       $box = ['gearbox', '=', $result['gearbox']];
     }
 
+    //querryn för lista alla lediga bilar mella två datum
     $bilar = DB::table('bookings')
       ->rightJoin('cars', 'bookings.car_id', 'cars.car_id')
       ->where('seats', '>=', $result['seats'])
@@ -58,6 +59,7 @@ class Car extends Model
 
   // get one car
   public static function getOneCar($id) {
+    //hämtar en bil
     $result = DB::table('cars')
       ->where('cars.car_id', $id)
       ->get();

@@ -8,9 +8,11 @@ use DB;
 class Frontpage extends Model
 {
     public static function getAllAvailableCarsToday() {
+        //sätter variablarna till dagen datum och till start och slut tid på dagen
         $todaysDateStart = date("Y-m-d") . ' 00:00:00';
         $todaysDateEnd =  date("Y-m-d") . ' 23:59:59';
 
+        //querryn för hämta bilarna som är lediga idag
         $result = DB::select( DB::raw(
           "SELECT *
           FROM cars

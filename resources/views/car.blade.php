@@ -53,6 +53,20 @@
             </div>
           @endforeach
         </div>
+        <div>
+        @if (Auth::check())
+          @include('components.ratings')
+        @else
+          <p>Du behöver logga in för att Rösta</p>
+        @endif
+            <div class="card">
+                <div class="card-body row">
+                  <div class="col-md-6">
+                    Rating {{$rating}} / 5
+                  </div>
+                </div>
+            </div>
+        </div>
 
       </div>
 
