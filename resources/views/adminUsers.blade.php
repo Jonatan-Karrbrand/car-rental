@@ -7,23 +7,23 @@
   @auth
     @can('admin-only')
     <div class="col-md-8 padding-top">
-      <h1>Alla Användare</h1>
+      <h1>Admin Användare</h1>
       @if(session('message'))
         <p>{{session('message')}}</p>
       @endif
       @foreach ($users as $user)
         <div class="card" style="margin-bottom: 10px;">
             <div class="card-body row">
-              <div class="col-md-10">
-              <h2>{{ $user->name}}</h2>
-              {{$user->email}}
-              <div class="form-button">
-              <a class="btn btn-primary" href="{{ url('/admin/users/' . $user->user_id . '/edit')}}">Uppdatera</a>
+              <div class="col-md-6">
+                <h2>{{ $user->name}}</h2>
+                {{$user->email}}
+              </div>
+              <div class="col-md-6">
+                <a class="btn btn-primary" href="{{ url('/admin/users/' . $user->user_id . '/edit')}}">Uppdatera</a>
                 {!! Form::open(['action' => ['AdminUserController@destroy', $user->user_id] , 'method' => 'POST']) !!}
-                {!! Form::hidden('_method', 'DELETE')!!}
-                {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
-              {!! Form::close() !!}
-        </div>
+                  {!! Form::hidden('_method', 'DELETE')!!}
+                  {{Form::submit('Delete', ['class' => 'btn btn-primary'])}}
+                {!! Form::close() !!}
               </div>
             </div>
           </div>

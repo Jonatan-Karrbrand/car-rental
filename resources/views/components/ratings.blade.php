@@ -1,6 +1,6 @@
 @if($notVoted)
     {!! Form::open(['action' => 'CarController@store', 'method' => 'POST']) !!}
-        {!! Form::label('rating', 'Rating') !!}
+        {!! Form::label('rating', 'Betyg') !!}
         {!! Form::select('rating', array(
                         '1' => '1',
                         '2' => '2',

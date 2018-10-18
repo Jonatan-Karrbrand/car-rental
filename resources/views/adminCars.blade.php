@@ -7,7 +7,8 @@
   @auth
     @can('admin-only')
     <div class="col-md-8 padding-top">
-      <h1>Alla Bilar</h1>
+      <h1>Admin Bilar</h1>
+      <a class="btn btn-primary" href="/admin/cars/create">Lägg till</a>
       @if(session('message'))
         <p>{{session('message')}}</p>
       @endif
@@ -19,7 +20,7 @@
                 <img style="max-width: 200px;" src="{{asset($car->image)}}" alt="">
               </div>
               <div class="col-md-6 single-car-col">
-                <h2><a href="/cars/{{$car->car_id}}">{{ $car->model}}</a></h2>
+                <h2><a href="/cars/{{$car->car_id}}" style="color: black;">{{ $car->model}}</a></h2>
 
                 <a class="btn btn-primary" href="{{ url('/admin/cars/' . $car->car_id . '/edit')}}">Uppdatera</a>
                   <div class="form-button">

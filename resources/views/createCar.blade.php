@@ -15,10 +15,10 @@
                 </ul>
             </div>
         @endif
-        @if(session('message'))
-            <p>{{session('message')}}</p>
-        @endif
         <div class="col-md-8">
+          @if(session('message'))
+            <p>{{session('message')}}</p>
+          @endif
           <h1>Add new cars</h1>
                 {!! Form::open(['route' => 'AdminCar.store', 'enctype' => 'multipart/form-data']) !!}
             <div class="form-group">
@@ -50,7 +50,7 @@
                     )) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('gearbox', 'växellåda') !!}
+                {!! Form::label('gearbox', 'Växellåda') !!}
                 {!! Form::select('gearbox', array(
                     'Manuell' => 'Manuell',
                     'Automat' => 'Automat'

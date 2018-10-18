@@ -26,8 +26,15 @@
           <li>Antal hästkrafter: {{ $car->bhp }}</li>
           <li>Avgift: {{ $car->price_per_day }}kr/dag</li>
         </ul>
+        <div>
+          @if (Auth::check())
+          @include('components.ratings')
+          @else
+          <p>Du behöver logga in för att Rösta</p>
+          @endif
+          <p>Betyg {{$rating}} / 5</p>
+        </div>
       </div>
-
     </div>
 
     <div class="row">
@@ -57,21 +64,6 @@
             </div>
           @endforeach
         </div>
-        <div>
-        @if (Auth::check())
-          @include('components.ratings')
-        @else
-          <p>Du behöver logga in för att Rösta</p>
-        @endif
-            <div class="card">
-                <div class="card-body row">
-                  <div class="col-md-6">
-                    Rating {{$rating}} / 5
-                  </div>
-                </div>
-            </div>
-        </div>
-
       </div>
 
     </div>
